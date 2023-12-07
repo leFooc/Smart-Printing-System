@@ -90,29 +90,16 @@ const turnOff = async (printerId) => {
     await printer.save();
 }
 
-const doTask = async (printerId, papers, next) => {
-    try {
-        await timeout(1);
-        if (typeof (printerId) != 'number') {
-            const error = new Error("Printer not found");
-            error.statusCode = 404;
-            throw error;
-        }
-        let printer = await db.Printer.findByPk(printerId);
-        if (printer.Papers - papers < 0) {
-            const error = new Error("Not enough paper");
-            error.statusCode = 500;
-            throw error;
-        }
-        printer.TaskCount = printer.TaskCount > 0 ? printer.TaskCount - 1 : printer.TaskCount;
-        printer.Papers -= papers;
-        await printer.save();
-    } catch (err) {
-        if (!err.statusCode) {
-            err.statusCode = 500;
-        }
-        next(err);
+const doTask = async (printerId) => {
+    await timeout(1);
+    if (typeof (printerId) != 'number') {
+        const error = new Error("Printer not found");
+        error.statusCode = 404;
+        throw error;
     }
+    let printer = await db.Printer.findByPk(printerId);
+    printer.TaskCount = printer.TaskCount > 0 ? printer.TaskCount - 1 : printer.TaskCount;
+    await printer.save();
 }
 
 const addPaper = async (printerId, papers) => {

@@ -96,7 +96,7 @@ const unlinkFile = async (fileId) => {
         }
     });
     if (file) {
-        const filePath = path.join(__dirname, '../../../', file.filePath);
+        const filePath = path.join(__dirname, '../../', file.filePath);
         //console.log(filePath);
         fs.unlink(filePath, (err) => {
             if (err) throw err;
@@ -113,7 +113,7 @@ const countPage = async (id) => {
             id: id
         }
     });
-    let filepath = path.join(__dirname, "../../../", file.filePath);
+    let filepath = path.join(__dirname, "../../", file.filePath);
     if (file.fileType == ".docx") {
         const docxBuffer = fs.readFileSync(filepath);
         const pages = await pagecount.DocxCounter.count(docxBuffer);

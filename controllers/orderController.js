@@ -7,18 +7,19 @@ const createOrder = async (req, res, next) => {
         const printerId = parseInt(req.body.printerId);
         const fileId = parseInt(req.body.fileId);
         const copies = parseInt(req.body.copies);
-        const isPortrait = req.body.isPortrait == "true" ? true : false;
-        const isA4 = req.body.isA4 == "true" ? true : false;
+        const side = parseInt(req.body.side);
+        const isPortrait = req.body.isPortrait == true ? true : false;
+        const isA4 = req.body.isA4 == true ? true : false;
         const properties = await fileService.countPage(fileId);
         await orderService.createOrder(
             userId,
             printerId,
             fileId,
             copies,
+            side,
             isPortrait,
             isA4,
-            properties,
-            next
+            properties
         );
         res.status(200).json({
             message: "create order successfully"

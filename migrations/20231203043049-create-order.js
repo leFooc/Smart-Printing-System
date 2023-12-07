@@ -52,6 +52,11 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER
       },
+      side: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        defaultValue: 1
+      },
       isPortrait: {
         allowNull: false,
         type: Sequelize.BOOLEAN,

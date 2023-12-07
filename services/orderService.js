@@ -2,7 +2,7 @@ const db = require('../models/index');
 const fileService = require('./fileService');
 const printerService = require('./printerService');
 
-const createOrder = async (userId, printerId, fileId, copies, isPortrait, isA4, properties, next) => {
+const createOrder = async (userId, printerId, fileId, copies, side, isPortrait, isA4, properties) => {
     if (! await fileService.validateOwnership(userId, fileId)) {
         const error = new Error("File not found");
         error.statusCode = 404;
@@ -17,13 +17,9 @@ const createOrder = async (userId, printerId, fileId, copies, isPortrait, isA4, 
     let papers = 0;
     if (properties.type == 'document') {
         //A4: 210x297 ; A3: 297x420 A4=0.7A3
-        if (!isA4 && isPortrait) {
-            papers = Math.ceil(properties.page * 0.7) * 2;
-        } //A3
-        else if (!isA4 && !isPortrait) {
-            papers = Math.ceil(properties.page * 0.5) * 2;
-        }
-        else papers = properties.page
+        if (!isA4) papers = properties.page * 2;
+        else papers = properties.page;
+        if (side == 2) paper = Math.ceil(paper / 2);
     }
     else if (properties.type == 'image') {
         if (!isA4) papers = properties.page * 2;
@@ -70,9 +66,7 @@ const createOrder = async (userId, printerId, fileId, copies, isPortrait, isA4, 
     });
     await order.save();
 
-    printer.TaskCount -= 1;
-    await printer.save();
-
+    printerService.doTask(printerId);
     //let minute = 1;
     //printerService.doTask(printerId, papers, next);
 }
