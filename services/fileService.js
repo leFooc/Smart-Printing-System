@@ -19,7 +19,7 @@ const getFiles = async (userId) => {
 const createFile = async (userId, file) => {
     let originalName = file.originalname;
     let filepath = file.path.replace('\\\\', '/').replace('\\', '/');
-    let index = filepath.indexOf('SmartPrintingSystem'); //change me to Smart-Pringting-System
+    let index = filepath.indexOf('Smart-Printing-System'); //change me to Smart-Pringting-System
     filepath = filepath.substr(index);
     let filetype = path.extname(filepath);
 
