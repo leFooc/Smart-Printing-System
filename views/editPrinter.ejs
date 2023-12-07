@@ -1,0 +1,50 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sửa thông tin máy in</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="printer form">
+        <form method="post" action="/printer/edit">
+            <div class="container">
+                <div class="my-3 row" style="height: 100px" hidden>
+                    <input class="form-control" id="printerId" name="id" value="<%= printer.id%>">
+                </div>
+                <div class="my-3 row" style="height: 100px">
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-6">
+                        <label for="printerName" class="form-label">Nhập lại tên máy in</label>
+                        <input type="name" class="form-control" id="printerName" name="name"
+                            placeholder="<%= printer.Name%>">
+                    </div>
+                </div>
+                <div class="my-3 row" style="height: 100px">
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-6">
+                        <label for="printerLocation" class="form-label">Nhập lại địa điểm</label>
+                        <input type="location" class="form-control" id="printerLocation" name="location"
+                            placeholder="<%= printer.Location%>">
+                    </div>
+                </div>
+                <div class="my-3 row" style="height: 100px">
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-6">
+                        <button type="submit" class="btn btn-primary">Xác nhận</button>
+                        <a href="/printer" role="button" class="btn btn-secondary">Hủy</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

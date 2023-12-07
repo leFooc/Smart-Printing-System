@@ -1,0 +1,97 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý máy in</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <table class=" table table-hover table-bordered">
+            <thead class="thead thead-dark">
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Active status</th>
+                    <th scope="col">Current paper</th>
+                    <th scope="col">Current using</th>
+                    <th scope="col">#</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% list.forEach((printer)=> { %>
+                    <tr>
+                        <th scope="row" hidden>
+                            <%= printer.id %>
+                        </th>
+                        <td scope="row">
+                            <%= printer.Name %>
+                        </td>
+                        <td>
+                            <%= printer.Location %>
+                        </td>
+                        <% if (printer.ActiveStatus) { %>
+                            <td>On</td>
+                            <td>
+                                <%= printer.Papers %>
+                            </td>
+                            <td>
+                                <%= printer.TaskCount %>
+                            </td>
+                            <td>
+                                <form>
+                                    <input class="form-control" id="id" name="id" value="<%= printer.id%>"
+                                        type="hidden">
+                                    <button class="btn btn-dark" formaction="/printer/turnoff" formmethod="post"
+                                        id="switch" type="submit">Turn
+                                        off</button>
+                                    <a class="btn btn-primary" href="/printer/addpaper/<%= printer.id%>">Add paper</a>
+                                    <a class="btn btn-primary" href="/printer/edit/<%= printer.id%>">Edit</a>
+                                    <button class="btn btn-danger" formaction="/printer/delete" formmethod="post"
+                                        id="delete" type="submit">Delete</button>
+                                </form>
+                            </td>
+                            <% } else { %>
+                                <td>Off</td>
+
+                                <td>
+                                    <%= printer.Papers %>
+                                </td>
+                                <td>
+                                    <%= printer.TaskCount %>
+                                </td>
+                                <td>
+                                    <form>
+                                        <input class="form-control" id="id" name="id" value="<%= printer.id%>"
+                                            type="hidden">
+                                        <button class="btn btn-success" formaction="/printer/turnon" id="switch"
+                                            formmethod="post" type="submit">Turn
+                                            on</button>
+                                        <a class="btn btn-primary" href="/printer/addpaper/<%= printer.id%>">Add
+                                            paper</a>
+                                        <a class="btn btn-primary" href="/printer/edit/<%= printer.id%>">Edit</a>
+                                        <button class="btn btn-danger" formaction="/printer/delete" formmethod="post"
+                                            id="delete" type="submit">Delete</button>
+                                    </form>
+                                </td>
+                                <% } %>
+                    </tr>
+                    <% }) %>
+            </tbody>
+        </table>
+        <div class="my-3 row" style="height: 100px">
+            <div class="col-sm-6">
+                <a href="/printer/create" role="button" class="btn btn-primary">Thêm máy in</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
