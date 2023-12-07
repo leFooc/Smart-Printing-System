@@ -10,14 +10,13 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       userId: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.INTEGER,
         references: {
           model: "Users",
           key: "id",
         },
-        onUpdate: 'NO ACTION',
-        onDelete: 'NO ACTION'
+        onDelete: 'SET NULL'
       },
       fileName: {
         allowNull: false,

@@ -19,7 +19,7 @@ const createOrder = async (userId, printerId, fileId, copies, side, isPortrait, 
         //A4: 210x297 ; A3: 297x420 A4=0.7A3
         if (!isA4) papers = properties.page * 2;
         else papers = properties.page;
-        if (side == 2) paper = Math.ceil(paper / 2);
+        if (side == 2) papers = Math.ceil(papers / 2.0);
     }
     else if (properties.type == 'image') {
         if (!isA4) papers = properties.page * 2;

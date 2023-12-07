@@ -13,34 +13,31 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       printerId: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.INTEGER,
         references: {
           model: 'Printers',
           key: 'id'
         },
-        onUpdate: 'CASCADE',
-        onDelete: 'No ACTION'
+        onDelete: 'SET NULL'
       },
       userId: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.INTEGER,
         references: {
           model: 'Users',
           key: 'id'
         },
-        onUpdate: 'CASCADE',
-        onDelete: 'NO ACTION'
+        onDelete: 'SET NULL'
       },
       fileId: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.INTEGER,
         references: {
           model: 'Files',
           key: 'id',
         },
-        onUpdate: 'CASCADE',
-        onDelete: 'NO ACTION'
+        onDelete: 'SET NULL'
       },
       fileName: {
         type: Sequelize.STRING
